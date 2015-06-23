@@ -4,8 +4,6 @@ The game requires you to give instructions to small programmable characters🚶.
 
 Primary interface is the CLI 💻. You can do a bunch of stuff either with mouse or via code (selecting, assigning tasks) but should be more productive to use code and snippets. The gameplay is based on manipulating lists and jQuery-style selections. Characters will be grouped into sets that can filtered, combined, mapped, controlled etc.
 
-Visual style is like ![Aseprite](http://aseprite.org/assets/images/gamedev.gif) interface - very old school mouse and UI.
-
         play area (parentheses indicate character's tags)
         |  _______________________________________________
         |  |                                   | tags    |
@@ -20,7 +18,15 @@ Visual style is like ![Aseprite](http://aseprite.org/assets/images/gamedev.gif) 
            |___________________________________|_________|
 
 
-Play area gfx are ![minecraft-y/rougelike](http://i.imgur.com/Sd4J6Kr.png). It's "3d" (need to dig down, and build up) so either 3/4 view top-down, or maybe isometric, or full 3D.
+# Visual style
+
+Visual style is like Aesprite: Very old school mouse and UI.
+
+![Aseprite](http://aseprite.org/assets/images/gamedev.gif)
+
+Play area gfx are minecraft-y/rougelike. It's "3d" (need to dig down, and build up) so either 3/4 view top-down, or maybe isometric, or full 3D. Perhaps something like this:
+
+![minecraft-y/rougelike](http://i.imgur.com/Sd4J6Kr.png)
 
 # The language
 
