@@ -26,7 +26,7 @@ Visual style is like Aesprite: Very old school mouse and UI.
 
 Play area gfx are minecraft-y/rougelike. It's "3d" (need to dig down, and build up) so either 3/4 view top-down, or maybe isometric, or full 3D. Perhaps something like this:
 
-![minecraft-y/rougelike](http://i.imgur.com/Sd4J6Kr.png)
+![minecraft-y/rougelike](https://cloud.githubusercontent.com/assets/129330/8313869/8a92774e-19b3-11e5-9d3f-87082c47d0b1.png)
 
 # The language
 
