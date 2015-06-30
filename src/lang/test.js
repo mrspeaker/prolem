@@ -1,49 +1,54 @@
-var code_input = "red goto(10, 10)";
+'use strict';
+
 //http://www.codeproject.com/Articles/345888/How-to-write-a-simple-interpreter-in-JavaScript
-// Lex
+
 const lex = function (input) {
-  const keywords = ['goto'];
-  var isOperator = function (c) { return /[+\-*\/\^%=(),]/.test(c); },
-    isDigit = function (c) { return /[0-9]/.test(c); },
-    isWhiteSpace = function (c) { return /\s/.test(c); },
-    isIdentifier = function (c) { return typeof c === "string" && !isOperator(c) && !isDigit(c) && !isWhiteSpace(c); };
 
-    var tokens = [], c, i = 0;
-    var advance = function () { return c = input[++i]; };
-    var addToken = function (type, value) {
-      tokens.push({
-        type: type,
-        value: value
-     });
-    };
-    while (i < input.length) {
-      c = input[i];
-      if (isWhiteSpace(c)) advance();
-      else if (isOperator(c)) {
-        addToken(c);
-        advance();
-      }
-      else if (isDigit(c)) {
-        var num = c;
-        while (isDigit(advance())) num += c;
-        if (c === ".") {
-          do num += c; while (isDigit(advance()));
-        }
-        num = parseFloat(num);
-        if (!isFinite(num)) throw "Number is too large or too small for a 64-bit double.";
-        addToken("number", num);
-      }
-      else if (isIdentifier(c)) {
-        var idn = c;
-        while (isIdentifier(advance())) idn += c;
-        addToken("identifier", idn);
-      }
-      else throw "Unrecognized token.";
+  const isOperator = c => /[+\-*\/\^%=(),]/.test(c);
+  const isDigit = c => /[0-9]/.test(c);
+  const isWhiteSpace = c => /\s/.test(c);
+  const isIdentifier = c => typeof c === "string" && !isOperator(c) && !isDigit(c) && !isWhiteSpace(c);
+
+  const tokens = [];
+  var c;
+  var i = 0;
+
+  const advance = () => c = input[++i];
+  const addToken = (type, value) => tokens.push({
+    type: type,
+    value: value
+  });
+
+  while (i < input.length) {
+    c = input[i];
+    if (isWhiteSpace(c)) {
+      advance();
     }
-    addToken("(end)");
-    return tokens;
-};
+    else if (isOperator(c)) {
+      addToken(c);
+      advance();
+    }
+    else if (isDigit(c)) {
+      var num = c;
+      while (isDigit(advance())) { num += c };
+      if (c === ".") {
+        do num += c;
+        while (isDigit(advance()));
+      }
+      num = parseFloat(num);
+      addToken("number", num);
+    }
+    else if (isIdentifier(c)) {
+      var idn = c;
+      while (isIdentifier(advance())) { idn += c };
+      addToken("identifier", idn);
+    }
+    else throw "Unrecognized token.";
+  }
 
+  addToken("(end)");
+  return tokens;
+};
 
 var parse = function (tokens) {
  var parseTree = [];
@@ -117,7 +122,7 @@ var parse = function (tokens) {
   symbol("(end)");
 
   symbol("(", function () {
-    value = expression(2);
+    var value = expression(2);
     if (token().type !== ")") throw "Expected closing parenthesis ')'";
     advance();
     return value;
