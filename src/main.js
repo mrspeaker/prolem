@@ -1,18 +1,8 @@
 import GameScreen from './GameScreen';
 
-import lexer from './lang/lexer';
-import parser from './lang/parser';
-import evaluator from './lang/evaluator';
+const game = new GameScreen();
 
-const input = 'red goto(10, 10, 10) build(2, 2)';
-
-const tokens = lexer(input);
-const ast = parser(tokens);
-//const output = evaluator(ast);
-
-console.log(JSON.stringify(ast, null, 2));
-
-/*const game = new GameScreen();
+window.game = game;
 
 function loop () {
   game.update(16);
@@ -20,7 +10,7 @@ function loop () {
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
-*/
+
 export default {};
 
 
