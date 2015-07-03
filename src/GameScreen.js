@@ -47,7 +47,8 @@ class GameScreen {
     switch (ins.type) {
     case 'identifier':
       console.log('identify:', ins.value);
-      program.selection.push(ins.value)
+      program.selection = this[ins.value] ? [this[ins.value]] : [];
+      //program.selection.push(ins.value === 'red' ? this.p1 : null);
       program.instruction = null;
       break;
     case 'call':

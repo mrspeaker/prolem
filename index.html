@@ -5,10 +5,19 @@
   <title>Prolem</title>
 </head>
 <body>
+  <input type="text" style="width:200px" id="cli" value="red goto(10, 10) build(2, 2)" />
+  <button id="btnExec">exec</button>
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
   <script>
     System.import('src/main');
+
+    document.querySelector("#btnExec").addEventListener("click", () => {
+      var val = document.querySelector("#cli").value;
+      if (val) {
+        game.addProgram(val);
+      }
+    }, false);
   </script>
 </body>
 </html>
