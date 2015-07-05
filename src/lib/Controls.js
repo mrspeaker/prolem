@@ -51,3 +51,5 @@ Controls.prototype = {
   }
 
 };
+
+module.exports = Controls;

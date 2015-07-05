@@ -1,36 +1,35 @@
-(function () {
-  function lerp (x, inf, sup) {
-    return (x-inf) / (sup-inf);
-  }
 
-  function clamp (x, min, max) {
-    return Math.max(min, Math.min(x, max));
-  }
+function lerp (x, inf, sup) {
+  return (x-inf) / (sup-inf);
+}
 
-  function smoothstep (value, inf, sup) {
-    var x = clamp(lerp(value, inf, sup), 0, 1);
-    return x*x*(3 - 2*x); // smooth formula
-  }
+function clamp (x, min, max) {
+  return Math.max(min, Math.min(x, max));
+}
 
-  function gauss (x) {
-    return Math.exp(- x * x);
-  }
+function smoothstep (value, inf, sup) {
+  var x = clamp(lerp(value, inf, sup), 0, 1);
+  return x*x*(3 - 2*x); // smooth formula
+}
 
-  function gaussDistance (x, center, dist) {
-    return gauss((x-center)/dist);
-  }
+function gauss (x) {
+  return Math.exp(- x * x);
+}
 
-  function mix (a, b, p) {
-    return a * (1 - p) + b * p;
-  }
+function gaussDistance (x, center, dist) {
+  return gauss((x-center)/dist);
+}
 
-  window.mathutils = {
-    lerp: lerp,
-    clamp: clamp,
-    smoothstep: smoothstep,
-    gauss: gauss,
-    gaussDistance: gaussDistance,
-    mix: mix
-  };
+function mix (a, b, p) {
+  return a * (1 - p) + b * p;
+}
 
-}());
+module.exports = {
+  lerp: lerp,
+  clamp: clamp,
+  smoothstep: smoothstep,
+  gauss: gauss,
+  gaussDistance: gaussDistance,
+  mix: mix
+};
+

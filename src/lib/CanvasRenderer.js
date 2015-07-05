@@ -1,4 +1,4 @@
-'use strict';
+
 
 function CanvasRenderer (w, h) {
   var canvas = document.createElement('canvas');
@@ -61,3 +61,5 @@ CanvasRenderer.prototype = {
     render(container);
   }
 };
+
+module.exports = CanvasRenderer;

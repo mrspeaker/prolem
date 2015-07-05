@@ -3,6 +3,10 @@ import Perple from './Perple';
 import lexer from './lang/lexer';
 import parser from './lang/parser';
 
+import Container from './lib/Core';
+
+const screen = new Container();
+
 // game.addProgram("red goto(10, 10) build(2, 2)")
 
 class GameScreen {

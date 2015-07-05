@@ -96,3 +96,5 @@ TileMap.prototype.tileToWorldPosition = function (p) {
     y: p.y * this.map.tileH
   };
 };
+
+module.exports = Container;
