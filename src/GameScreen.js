@@ -17,8 +17,6 @@ const r = new Rect('#777', 10, 10);
 r.pos = {x: 20, y: 20};
 scene.add(r);
 
-renderer.render(scene);
-
 // game.addProgram("red goto(10, 10) build(2, 2)")
 
 class GameScreen {
@@ -73,6 +71,8 @@ class GameScreen {
         program.state.tick = 0;
       } else {
         program.state.tick++;
+        r.pos.x = Math.random() * 400 | 0;
+        r.pos.y = Math.random() * 200 | 0;
         console.log('tick', ins.args[0].value);
         if (ins.args[0].value-- <= 0) {
           program.instruction = null;
@@ -84,12 +84,12 @@ class GameScreen {
 
   update (dt) {
     this.programs.map(p => this.runProgram(p));
-
     this.p1.update(dt);
   }
 
   render () {
     //console.log(this.p1.pos);
+    renderer.render(scene);
   }
 }
 
