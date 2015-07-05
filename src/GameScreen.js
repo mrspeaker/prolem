@@ -3,9 +3,21 @@ import Perple from './Perple';
 import lexer from './lang/lexer';
 import parser from './lang/parser';
 
-import Container from './lib/Core';
+import CanvasRenderer from './lib/CanvasRenderer';
+import {
+  Container,
+  Rect
+} from './lib/Core';
 
-const screen = new Container();
+const scene = new Container();
+const renderer = new CanvasRenderer(400, 200);
+document.querySelector('#gameArea').appendChild(renderer.view);
+
+const r = new Rect('#777', 10, 10);
+r.pos = {x: 20, y: 20};
+scene.add(r);
+
+renderer.render(scene);
 
 // game.addProgram("red goto(10, 10) build(2, 2)")
 

@@ -97,4 +97,12 @@ TileMap.prototype.tileToWorldPosition = function (p) {
   };
 };
 
-module.exports = Container;
+module.exports = {
+  Container,
+  Rect,
+  Text,
+  Texture,
+  Sprite,
+  TileSprite,
+  TileMap
+};
