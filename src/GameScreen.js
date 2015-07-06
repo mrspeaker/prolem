@@ -70,9 +70,17 @@ class GameScreen {
         console.log('call', ins.name, 'on', program.selection );
         program.state.tick = 0;
       } else {
+        switch (ins.name) {
+        case 'goto':
+          r.pos.x += 1;
+          //r.pos.y = Math.random() * 200 | 0;
+          break;
+        case 'build':
+          break;
+        default:
+          console.log('unknown command:', ins.name);
+        }
         program.state.tick++;
-        r.pos.x = Math.random() * 400 | 0;
-        r.pos.y = Math.random() * 200 | 0;
         console.log('tick', ins.args[0].value);
         if (ins.args[0].value-- <= 0) {
           program.instruction = null;
