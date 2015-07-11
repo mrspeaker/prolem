@@ -54,7 +54,7 @@ Characters can have 0 or more tags associated with them so they can be grouped.
 
 ## Commands
 
-The actions a group of tagged characters should perform. If there are multiple characters sent to complete a task, they will work together so it is faster.
+The actions a group of tagged characters should perform. Characters are "threads" each running an instace of the program. If there are multiple characters sent to complete a task, they will work together so it is faster.
 
     $> + head dig(10, 10, 1)                // digs a square 10 x 10 x 1
     $> + head goto(10, 10) build(5, 5, 20)  // go somewhere and start building
