@@ -1,7 +1,8 @@
 const lexer = (input) => {
 
   const isOperator = c => /[(),]/.test(c);
-  const isDigit = c => /[0-9]/.test(c);
+  const isDigit = c => /[\-0-9]/.test(c);
+  const isMinus = c => /\-/.test(c);
   const isWhiteSpace = c => /\s/.test(c);
   const isIdentifier = c => typeof c === "string" && !isOperator(c) && !isDigit(c) && !isWhiteSpace(c);
 

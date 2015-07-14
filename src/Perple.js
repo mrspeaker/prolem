@@ -72,12 +72,26 @@ class Perple extends Container {
       switch (ins.name) {
       case 'goto':
         // turn goto into repeats.
+        // "while not at a point, move towards a point"
         break;
       case 'move':
-        const [x, y] = ins.args;
-        console.log('moveing', ins, x.value, y.value);
-        this.pos.x += x.value;
-        this.pos.y += y.value;
+        const dest = ins.args[0];
+        if (dest.type === 'call') {
+          if (dest.name === 'towards') {
+            const [x, y] = ins.args[0].args;
+            const xdiff = this.pos.x < x.value ? 1 : -1;
+            const ydiff = this.pos.y < y.value ? 1 : -1;
+            this.pos.x += xdiff;
+            this.pos.y += ydiff;
+          } else {
+            console.log('err, no', dest.name);
+          }
+        } else {
+          console.log('moveing by val');
+          const [x, y] = ins.args;
+          this.pos.x += x.value;
+          this.pos.y += y.value;
+        }
         break;
       case 'build':
         console.log('buld');
