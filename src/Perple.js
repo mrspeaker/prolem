@@ -1,29 +1,46 @@
+import { Container, Rect } from './lib/Core';
 
 const STATES = {
   idle: 0,
-  wander: 1
+  wander: 1,
+  running: 2,
 };
 
-class Perple {
+class Perple extends Container {
   constructor (x = 0, y = 0) {
-    this.pos = [x, y];
+    super();
+    this.children = [];
+    this.pos = {x, y};
+
+    this.add(new Rect('#777', 10, 10));
     this.tags = [];
     this.state = STATES.idle;
   }
 
   update (dt) {
+    super.update(dt);
+
     switch (this.state) {
+
     case STATES.idle:
+      this.state = STATES.wander;
       break;
+
     case STATES.wander:
-      this.pos[0] += Math.round(Math.random() * 2 - 1) * dt * 0.01;
-      this.pos[1] += Math.round(Math.random() * 2 - 1) * dt * 0.01;
+      this.pos.x += Math.round(Math.random() * 2 - 1) * dt * 0.01;
+      this.pos.y += Math.round(Math.random() * 2 - 1) * dt * 0.01;
       break;
+
+    case STATES.running:
+      this.run();
+      break;
+
     }
   }
 
   initProgram (program) {
-
+    this.program = program;
+    this.state = STATES.running;
   }
 
   run () {
@@ -34,49 +51,36 @@ class Perple {
       return;
     }
 
-    var first = false;
-    if (!program.instruction) {
-      if (program.ast.length === 0) {
-        // program terminated.
-        program.running = false;
-        return;
-      }
-      program.instruction = program.ast[0];
-      program.ast = program.ast.slice(1);
-      first = true;
+    if (program.ast.length === 0) {
+      // program terminated.
+      console.log('program terminated');
+      program.running = false;
+      this.state = STATES.wander;
+      return;
     }
+    program.instruction = program.ast[0];
+    program.ast = program.ast.slice(1);
 
-    var ins = program.instruction;
+    const ins = program.instruction;
 
     switch (ins.type) {
     case 'identifier':
+      // Move this to before init.
       console.log('identify:', ins.value);
-      //program.selection = this[ins.value] ? [this[ins.value]] : [];
-      //selection is now "this"
-      //program.selection.push(ins.value === 'red' ? this.p1 : null);
-      program.instruction = null;
       break;
     case 'call':
-      if (first) {
-        console.log('call', ins.name, 'on', program.selection );
-        program.state.tick = 0;
-      } else {
-        switch (ins.name) {
-        case 'goto':
-          r.pos.x += 1;
-          //r.pos.y = Math.random() * 200 | 0;
-          break;
-        case 'build':
-          break;
-        default:
-          console.log('unknown command:', ins.name);
-        }
-        program.state.tick++;
-        console.log('tick', ins.args[0].value);
-        if (ins.args[0].value-- <= 0) {
-          program.instruction = null;
-          program.state.tick = 0;
-        }
+      switch (ins.name) {
+      case 'move':
+        const [x, y] = ins.args;
+        console.log('moveing', ins, x.value, y.value);
+        this.pos.x += x.value;
+        this.pos.y += y.value;
+        break;
+      case 'build':
+        console.log('buld');
+        break;
+      default:
+        console.log('unknown command:', ins.name);
       }
     }
   }

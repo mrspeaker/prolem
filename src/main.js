@@ -12,6 +12,3 @@ function loop () {
 requestAnimationFrame(loop);
 
 export default {};
-
-
-

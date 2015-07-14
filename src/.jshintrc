@@ -1,0 +1,22 @@
+{
+  "indent": 2,
+  "globals": {
+    "fetch": true,
+    "alert": true
+  },
+  "esnext": true,
+  "browser": true,
+  "node": true,
+  "bitwise": false,
+  "camelcase": false,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "undef": true,
+  "unused": true,
+  "trailing": true,
+  "smarttabs": false,
+  "forin": false,
+  "globalstrict": false,
+  "quotmark": false
+}
