@@ -70,6 +70,9 @@ class Perple extends Container {
       break;
     case 'call':
       switch (ins.name) {
+      case 'goto':
+        // turn goto into repeats.
+        break;
       case 'move':
         const [x, y] = ins.args;
         console.log('moveing', ins, x.value, y.value);
@@ -78,6 +81,10 @@ class Perple extends Container {
         break;
       case 'build':
         console.log('buld');
+        break;
+      case 'repeat':
+        const reps = [...new Array(ins.args[0].value)].map(() => ins.args[1]);
+        program.ast = [...reps, ...program.ast];
         break;
       default:
         console.log('unknown command:', ins.name);
