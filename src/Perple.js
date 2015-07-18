@@ -64,10 +64,6 @@ class Perple extends Container {
     const ins = program.instruction;
 
     switch (ins.type) {
-    case 'identifier':
-      // Move this to before init.
-      console.log('identify:', ins.value);
-      break;
     case 'call':
       switch (ins.name) {
       case 'goto':
@@ -103,6 +99,9 @@ class Perple extends Container {
       default:
         console.log('unknown command:', ins.name);
       }
+      break;
+    default:
+      console.log('unknown top level command:', ins);
     }
   }
 }

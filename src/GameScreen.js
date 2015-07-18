@@ -19,14 +19,23 @@ class GameScreen {
 
     const p1 = new Perple(20, 20);
     scene.add(p1);
-    scene.add(new Perple(10, 10));
+    const p2 = new Perple(10, 10);
+    scene.add(p2);
 
+    this.entities.push(p1, p2);
     this.selection.push(p1);
   }
 
   addProgram (code) {
     const tokens = lexer(code);
     const ast = parser(tokens);
+
+    const first = ast[0];
+    if (first.type === 'identifier') {
+      // New selection
+      this.selection = [...this.entities];
+      ast.shift();
+    }
 
     // TODO: get first instruction, if ID, select...
     // else use current selection.
